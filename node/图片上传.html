@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+
+    <input id="upload" type="file">
+    <img id="preview" src="">
+
+<script type="text/javascript">
+        var file = document.getElementById('upload');
+        var img = document.getElementById('preview');
+        file.onchange = function () {
+            // 获取FileList的第一个元素
+            var input = file.files[0];
+            console.log(input)
+            var src = window.URL.createObjectURL(input);
+            console.log(src);
+            img.src = src
+        }
+</script>
+</body>
+
+</html>

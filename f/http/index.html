@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var a = 'video/89809';
+    console.log(a.split('video/8'))
+    // / 全角括号
+var source = '中国工商银行（朝阳分行）';
+// 半角括号
+//var source = '中国工商银行(朝阳分行)';
+var rt= /(.+)?(?:\(|（)(.+)(?=\)|）)/.exec(source);
+ 
+// 输出 中国工商银行
+console.log(rt[1]);
+// 输出 朝阳分行
+console.log(rt[2]);
+</script>
+</html>
