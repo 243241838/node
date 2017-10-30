@@ -4,9 +4,11 @@ var life = new EventEmitter;
 life.setMaxListeners(12) 
 //addEventEmitter
 //emit 发射发出的意思
-life.on('add', function (who) {
-    console.log('g' + who + '倒水1')
-})
+//配合下边删除
+function water(who) {
+     console.log('g' + who + '倒水11111')
+}
+life.on('add', water)
 life.on('add', function (who) {
     console.log('g' + who + '倒水2')
 })
@@ -31,26 +33,27 @@ life.on('add', function (who) {
 life.on('add', function (who) {
     console.log('g' + who + '倒水9')
 })
-life.on('add', function (who) {
-    console.log('g' + who + '倒水10')
-})
-life.on('add', function (who) {
-    console.log('g' + who + '倒水11')
-})
-life.on('add', function (who) {
-    console.log('g' + who + '倒水12')
-})
+// life.on('add', function (who) {
+//     console.log('g' + who + '倒水10')
+// })
+// life.on('add', function (who) {
+//     console.log('g' + who + '倒水11')
+// })
+// life.on('add', function (who) {
+//     console.log('g' + who + '倒水12')
+// })
 life.on('add1', function (who) {
     console.log('g' + who + '倒水12')
 })
-life.removeListener('add', function (test) {
-    console.log(test)
-
-})
+life.removeListener('add', water) //要是有名字的函数，匿名函数没有用
+// life.removeAllListeners() //取消life全部监听事件
 // 判断是否有这个监听事件
 var has = life.emit('add', '我')
-var has1 = life.emit('add1', '我')
-var has2 = life.emit('add2', '我')
-console.log(has)
+// var has1 = life.emit('add1', '我')
+let a = 0;
+console.log(life.listeners('add').length)
+// console.log(EventEmitter.listenerCount(life, 'add'))
+// var has2 = life.emit('add2', '我')
+// console.log(has) //有true 无false
 // console.log(has1)
 // console.log(has2)
