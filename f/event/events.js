@@ -57,3 +57,4 @@ console.log(life.listeners('add').length)
 // console.log(has) //有true 无false
 // console.log(has1)
 // console.log(has2)
+
