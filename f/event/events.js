@@ -40,5 +40,17 @@ life.on('add', function (who) {
 life.on('add', function (who) {
     console.log('g' + who + '倒水12')
 })
-// 实验
-life.emit('add', '我')
+life.on('add1', function (who) {
+    console.log('g' + who + '倒水12')
+})
+life.removeListener('add', function (test) {
+    console.log(test)
+
+})
+// 判断是否有这个监听事件
+var has = life.emit('add', '我')
+var has1 = life.emit('add1', '我')
+var has2 = life.emit('add2', '我')
+console.log(has)
+// console.log(has1)
+// console.log(has2)
