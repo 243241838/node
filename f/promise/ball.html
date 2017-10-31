@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .ball{
+            width:40px;
+            height:40px;
+            border-radius:20px;
+        }
+        .ball1{
+            background: red;
+        }
+        .ball2{
+            background: yellow;
+        }
+        .ball3{
+            background: green;
+        }
+    </style>
+    <script src="./node_modules/bluebird/js/browser/bluebird.js"></script>
+</head>
+<body>
+    <div class="ball ball1" style="margin-left:0"></div>
+    <div class="ball ball2" style="margin-left:0"></div>
+    <div class="ball ball3" style="margin-left:0"></div>
+</body>
+<script>
+    var ball1 = document.querySelector(".ball1");
+    var ball2 = document.querySelector(".ball2");
+    var ball3 = document.querySelector(".ball3");
+    function animate(ball, distance, cb) {
+        setTimeout(function() {
+            var marginLeft = parseInt(ball.style.marginLeft, 10);
+            console.log(marginLeft)
+            if (marginLeft === distance) {
+                cb && cb();
+            } else {
+                if (marginLeft < distance) {
+                    marginLeft++;
+                } else {
+                    marginLeft--
+                }
+                console.log(marginLeft)
+                ball.style.marginLeft = marginLeft + 'px';
+                animate(ball, distance, cb)
+            }
+        }, 13)
+    }
+    // animate(ball1, 100, function() {
+    //     animate(ball2, 200, function() {
+    //         animate(ball3, 300, function() {
+    //             animate(ball3, 150, function() {
+    //                 animate(ball2, 150, function() {
+    //                     animate(ball1, 150, function() {
+    //                         //
+    //                     })
+    //                 })
+    //             })
+    //         })
+    //     })
+    // })
+    var Promise = window.Promise;
+    //promise 三种状态 pending 未完成 fulfilled 已完成 rejected 失败
+    function promiseAnimate(ball, distance) {
+        return new Promise(function(resolve, reject) { //第一个相当于成功后的调用， 第二个相当于失败后的调用（只是相当于，自己可以设定失败，去调用，不是出错时调用）
+            function _animate() {
+                setTimeout(function() {
+                    var marginLeft = parseInt(ball.style.marginLeft, 10);
+                    if (marginLeft === distance) {
+                        // resolve('你大爷'); //传入的参数，下边then能接收到
+                        resolve();
+                    } else {
+                        if (marginLeft < distance) {
+                            marginLeft++;
+                        } else {
+                            marginLeft--
+                        }
+                        ball.style.marginLeft = marginLeft + 'px';
+                        _animate()
+                    }
+                }, 13)
+            }
+            _animate();
+        })
+    }
+    promiseAnimate(ball1, 100)
+        .then(function(a) {
+            // console.log(a)
+            return promiseAnimate(ball2, 200)
+        })
+        .then(function() {
+            return promiseAnimate(ball3, 300)
+        })
+        .then(function() {
+            return promiseAnimate(ball3, 150)
+        })
+        .then(function() {
+            // return 'hhah' //这边返回的数据  下边then可以接收到
+            return promiseAnimate(ball2, 150)
+        })
+        .then(function(a) {
+            // console.log(a)
+            return promiseAnimate(ball1, 150)
+        })
+</script>
+</html>
