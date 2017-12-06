@@ -5,7 +5,7 @@ http.createServer(function (request, response) {
     // 内容类型: text/plain
     response.writeHead(200, {'Cotent-Type': 'text/plain'});
     // 发送响应数据 "Hello World"
-    response.end('Hello World\n');
+    response.end();
 }).listen(8888);
 //终端打印如下信息
 console.log('hhahhha ');
