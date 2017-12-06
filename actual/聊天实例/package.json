@@ -1,0 +1,13 @@
+{
+  "name": "chatromms",
+  "version": "0.0.1",
+  "descriotion": "Minimalist multiroom chat server",
+  "dependencies": {
+    "socket.io": "~0.9.6",
+    "mime": "~1.2.7"
+  },
+  "devDependencies": {
+    "mime": "^1.2.11",
+    "socket.io": "^0.9.19"
+  }
+}
